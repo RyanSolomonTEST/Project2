@@ -6,12 +6,17 @@
 var fs = require('fs'),
     mongoose = require('mongoose'), 
     Schema = mongoose.Schema, 
-    Listing = require('./ListingSchema.js'), 
-    config = require('./config');
+    listing = require('./ListingSchema.js'), 
+    config = require('./config'),
+    listingsJSON = require('./listings.json');
+
 
 /* Connect to your database using mongoose - remember to keep your key secret*/
+mongoose.connect(config.db.uri, { useNewUrlParser: true });
 //see https://mongoosejs.com/docs/connections.html
 //See https://docs.atlas.mongodb.com/driver-connection/
+
+
 
 /* 
   Instantiate a mongoose model for each listing object in the JSON file, 
@@ -20,7 +25,25 @@ var fs = require('fs'),
 
   Remember that we needed to read in a file like we did in Bootcamp Assignment #1.
  */
+for(var i = 0; i < listingsJSON.entries.length; i++){
+    var newListingData = listing({
+      code: listingsJSON.entries[i].code,
+      name: listingsJSON.entries[i].name,
+      coordinates: listingsJSON.entries[i].coordinates,
+      address: listingsJSON.entries[i].address
+    });
 
+
+newListingData.save(function(err){
+  if(err){
+    throw err;
+  }
+})
+}
+  
+
+
+ 
 
 /*  
   Check to see if it works: Once you've written + run the script, check out your MongoLab database to ensure that 
