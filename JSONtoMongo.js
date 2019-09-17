@@ -22,7 +22,6 @@ mongoose.connect(config.db.uri, { useNewUrlParser: true });
   Instantiate a mongoose model for each listing object in the JSON file, 
   and then save it to your Mongo database 
   //see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-
   Remember that we needed to read in a file like we did in Bootcamp Assignment #1.
  */
 for(var i = 0; i < listingsJSON.entries.length; i++){
