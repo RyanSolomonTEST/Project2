@@ -13,18 +13,18 @@ var fs = require('fs'),
 
 /* Connect to your database using mongoose - remember to keep your key secret*/
 mongoose.connect(config.db.uri, { useNewUrlParser: true });
-//see https://mongoosejs.com/docs/connections.html
-//See https://docs.atlas.mongodb.com/driver-connection/
+
 
 
 
 /* 
-  Instantiate a mongoose model for each listing object in the JSON file, 
-  and then save it to your Mongo database 
-  //see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-  Remember that we needed to read in a file like we did in Bootcamp Assignment #1.
+Reads in listing file then creates new listing object according
+to schema
  */
-for(var i = 0; i < listingsJSON.entries.length; i++){
+
+fs.readFile('./listingsJSON', 'utf8', function(err, data){
+
+  for(var i = 0; i < listingsJSON.entries.length; i++){
     var newListingData = listing({
       code: listingsJSON.entries[i].code,
       name: listingsJSON.entries[i].name,
@@ -39,6 +39,9 @@ newListingData.save(function(err){
   }
 })
 }
+
+})
+
   
 
 
