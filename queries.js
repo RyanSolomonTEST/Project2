@@ -19,6 +19,7 @@ var findLibraryWest = function() {
       if(err){
         throw err;
       }
+      console.log("Found Library West!");
       console.log(data);
    })
 };
@@ -34,6 +35,7 @@ var removeCable = function() {
       throw err;
     }
     console.log("Deleted document with code CABL")
+    console.log(data);
   })
 };
 var updatePhelpsLab = function() {
@@ -41,11 +43,12 @@ var updatePhelpsLab = function() {
     Phelps Lab address is incorrect. Find the listing, update it, and then 
     log the updated document to the console. 
    */
-  ListingSchema.findOneAndUpdate({name: "Phelps Laboratory"},{address: "1953 Museum Rd, Gainesville, FL 32603"},
+  ListingSchema.findOneAndUpdate({code: 'PHL'}, {address: "1953 Museum Rd, Gainesville, FL 32603"}, 
   function(err, data){
-    if(err){
+    if (err){
       throw err;
     }
+    console.log("Updated Phelps Lab address"),
     console.log(data);
   })
 };
@@ -58,6 +61,7 @@ var retrieveAllListings = function() {
     if(err){
       throw err;
     }
+    console.log("Printing all listings!");
     console.log(data);
   })
 };
